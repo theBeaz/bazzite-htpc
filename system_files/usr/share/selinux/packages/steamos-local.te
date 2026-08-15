@@ -1,0 +1,19 @@
+
+module steamos-local 1.0;
+
+require {
+	type init_t;
+	type bootupd_t;
+	type tracefs_t;
+	type proc_t;
+	class dir { read rmdir };
+	class file { create getattr open read write };
+}
+
+#============= bootupd_t ==============
+allow bootupd_t proc_t:dir read;
+allow bootupd_t proc_t:file { getattr open read };
+
+#============= init_t ==============
+allow init_t tracefs_t:dir rmdir;
+allow init_t tracefs_t:file { create open read write };
